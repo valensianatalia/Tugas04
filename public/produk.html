@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk Rekomendasi</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body class="bg-gray-50">
+    <header class="bg-gray-800 text-white font-semibold p-2 text-center">
+        <div class="w-full">
+            <ul class="flex space-x-4 justify-center">
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="index.html#beranda">Beranda</a></li>
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="index.html#identitas">Profil</a></li>
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="index.html#hobi">Hobi dan Minat</a></li>
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="index.html#sekolah">Riwayat Pendidikan</a></li>
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="index.html#organisasi">Pengalaman Organisasi</a></li>
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="index.html#portofolio">Portofolio</a></li>
+                <li class="hover:text-white hover:bg-gray-900 px-5 py-2 rounded"><a href="produk.html">Produk Rekomendasi</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="app" class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Produk Rekomendasi</h1>
+
+        <div class="grid grid-cols-3 gap-5">
+            <div v-for="product in products" :key="product.id" class="border p-4 relative flex flex-col">
+                <img :src="product.image" alt="Foto Produk" class="w-full h-auto object-cover mb-2 product-image">
+                <h2 class="text-xl font-semibold whitespace-break-spaces">{{ product.name }}</h2>
+                <p class="text-gray-600">{{ product.description }}</p>
+                <p class="text-gray-800 font-bold">Harga: Rp.{{ product.price }}.000</p>
+
+            <div class="mt-1">
+                    <label for="quantity" class="text-sm">Jumlah: </label>
+                    <input v-model="product.quantity" type="number" id="quantity" class="border rounded-md px-2 py-1 w-16 mb-2">
+                    <button @click="addToCart(product)" class="bg-gray-800 text-white px-2 py-1 mt-4">Tambah ke Keranjang</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-bold mb-4">Keranjang Belanja</h2>
+            <ul>
+                <li v-for="item in cart" :key="item.id" class="border p-2 mb-2">
+                    {{ item.name }} - {{ item.price }} x{{ item.quantity }}
+                    <button @click="removeFromCart(item)" class="bg-red-400 text-white px-2 py-1 ml-2">Hapus</button>
+                </li>
+            </ul>
+            <p class="mt-4 font-semibold">Total: Rp.{{ cartTotal }}.000</p>
+        </div>
+    </div>
+
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
